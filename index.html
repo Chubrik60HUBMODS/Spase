@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Space Shooter v7</title>
+<title>Space Shooter</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -37,6 +37,7 @@
     z-index: -3;
     filter: brightness(0.45) saturate(0.7) contrast(1.1);
     transition: background-image 0.6s ease, filter 0.5s;
+    background-image: url('https://avatars.mds.yandex.net/i?id=0670deb444f3cb12192b403e4704674aa154969c-6490940-images-thumbs&n=13');
   }
 
   .bg-image.chaos {
@@ -45,7 +46,7 @@
 
   .bg-overlay {
     position: fixed; inset: 0;
-    background: 
+    background:
       radial-gradient(ellipse at 50% 50%, rgba(109, 94, 252, 0.15) 0%, transparent 60%),
       linear-gradient(180deg, rgba(5,5,16,0.6) 0%, rgba(5,5,16,0.85) 100%);
     z-index: -2;
@@ -54,7 +55,7 @@
   }
 
   .bg-overlay.chaos {
-    background: 
+    background:
       radial-gradient(ellipse at 50% 50%, rgba(255, 0, 255, 0.2) 0%, transparent 60%),
       linear-gradient(180deg, rgba(5,5,16,0.7) 0%, rgba(20,0,30,0.9) 100%);
   }
@@ -71,7 +72,7 @@
     max-width: 100%;
     max-height: calc(100vh - 120px);
     border-radius: 16px;
-    box-shadow: 
+    box-shadow:
       0 0 0 1px rgba(109, 94, 252, 0.4),
       0 0 0 6px rgba(109, 94, 252, 0.08),
       0 30px 80px rgba(0, 0, 0, 0.9),
@@ -83,7 +84,7 @@
   }
 
   canvas#game.chaos {
-    box-shadow: 
+    box-shadow:
       0 0 0 1px rgba(255, 0, 255, 0.6),
       0 0 0 6px rgba(255, 0, 255, 0.15),
       0 30px 80px rgba(0, 0, 0, 0.9),
@@ -315,7 +316,7 @@
     max-width: 720px;
     width: 100%;
     text-align: center;
-    box-shadow: 
+    box-shadow:
       0 30px 80px rgba(0, 0, 0, 0.9),
       0 0 100px rgba(109, 94, 252, 0.25),
       inset 0 1px 0 rgba(255,255,255,0.06);
@@ -1147,7 +1148,7 @@
 
   let state = 'start';
   let score = 0;
-  let record = parseInt(localStorage.getItem('spaceShooterRecord7') || '0');
+  let record = parseInt(localStorage.getItem('spaceShooterRecord8') || '0');
   let lives = 6;
   let level = 1;
   let lastTime = performance.now();
@@ -1159,9 +1160,9 @@
   let modeTimerValue = 0;
   let currentChaosMode = null;
 
-  let selectedShip = localStorage.getItem('selectedShip7') || 'fighter';
-  let selectedMap = localStorage.getItem('selectedMap7') || 'space';
-  let selectedMode = localStorage.getItem('selectedMode7') || 'normal';
+  let selectedShip = localStorage.getItem('selectedShip8') || 'fighter';
+  let selectedMap = localStorage.getItem('selectedMap8') || 'space';
+  let selectedMode = localStorage.getItem('selectedMode8') || 'normal';
 
   recordEl.textContent = record;
 
@@ -1465,7 +1466,7 @@
       document.querySelectorAll('.ship-card').forEach(o => o.classList.remove('selected'));
       opt.classList.add('selected');
       selectedShip = opt.dataset.ship;
-      localStorage.setItem('selectedShip7', selectedShip);
+      localStorage.setItem('selectedShip8', selectedShip);
     });
     if (opt.dataset.ship === selectedShip) opt.classList.add('selected');
     else opt.classList.remove('selected');
@@ -1476,7 +1477,7 @@
       document.querySelectorAll('.map-card').forEach(o => o.classList.remove('selected'));
       opt.classList.add('selected');
       selectedMap = opt.dataset.map;
-      localStorage.setItem('selectedMap7', selectedMap);
+      localStorage.setItem('selectedMap8', selectedMap);
       applyMapBackground();
     });
     if (opt.dataset.map === selectedMap) opt.classList.add('selected');
@@ -1488,7 +1489,7 @@
       document.querySelectorAll('.mode-card').forEach(o => o.classList.remove('selected'));
       opt.classList.add('selected');
       selectedMode = opt.dataset.mode;
-      localStorage.setItem('selectedMode7', selectedMode);
+      localStorage.setItem('selectedMode8', selectedMode);
     });
     if (opt.dataset.mode === selectedMode) opt.classList.add('selected');
     else opt.classList.remove('selected');
@@ -1553,7 +1554,7 @@
     state = 'gameover';
     if (score > record) {
       record = score;
-      localStorage.setItem('spaceShooterRecord7', record);
+      localStorage.setItem('spaceShooterRecord8', record);
     }
     finalScoreEl.textContent = score;
     finalLevelEl.textContent = level;
@@ -2057,7 +2058,7 @@
       }
     }
 
-    // ⚠️ ВРАГИ × ИГРОК — БЕЗ УРОНА ПРИ УХОДЕ ВНИЗ
+    // ВРАГИ × ИГРОК — БЕЗ УРОНА ПРИ УХОДЕ ВНИЗ
     for (let i = enemies.length - 1; i >= 0; i--) {
       const e = enemies[i];
       const dx = player.x - e.x;
@@ -2073,7 +2074,7 @@
           if (lives <= 0) { gameOver(); return; }
         }
       }
-      // ✅ ФИКС: враг ушёл за нижний край — просто удаляем БЕЗ УРОНА
+      // ✅ Враг ушёл за нижний край — просто удаляем БЕЗ УРОНА
       if (e.y > H + 40) {
         enemies.splice(i, 1);
       }
